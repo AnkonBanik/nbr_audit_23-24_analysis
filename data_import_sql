@@ -1,0 +1,31 @@
+
+-- database creation
+CREATE DATABASE IF NOT EXISTS nbr; 
+
+-- select database
+USE nbr;
+
+-- Table Creation 
+
+CREATE TABLE IF NOT EXISTS taxpayers (
+    sl INT,
+    tin VARCHAR(20),
+    zone VARCHAR(100),
+    circle VARCHAR(100),
+    submission_type VARCHAR(50),
+    assessment_year VARCHAR(20)
+)
+
+-- Local File Permission
+SHOW VARIABLES LIKE 'local_infile';
+SET GLOBAL local_infile = 1;
+
+-- Data Import
+
+LOAD DATA LOCAL INFILE '/home/ankon/Documents/raw.csv'
+INTO TABLE taxpayers
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
